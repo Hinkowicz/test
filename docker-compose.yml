@@ -1,0 +1,13 @@
+services:
+  giveaway-bot:
+    build: .
+    container_name: giveaway-bot
+    restart: unless-stopped
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+      CLIENT_ID: ${CLIENT_ID}
+      GUILD_ID: ${GUILD_ID}
+    volumes:
+      # Keeps giveaways.json / links.json across restarts and updates.
+      # The folder must contain links.default.json (it is part of the repo).
+      - ./data:/app/data
