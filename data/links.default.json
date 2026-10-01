@@ -1,4 +1,15 @@
 {
-  "website": { "url": "https://example.com", "description": "Unsere Website" },
-  "shop": { "url": "https://example.com/shop", "description": "Zum Shop" }
+  "luftkuehler": { "url": "https://gh.at/g/Hgx", "description": "Hier die Luftkühler-Empfehlungen von Hinko und seinem Team" },
+  "aio": { "url": "https://gh.at/g/Hg5", "description": "Hier die AIO-Wasserkühlungs-Empfehlungen von Hinko und seinem Team" },
+  "ssd-1tb": { "url": "https://gh.at/g/HgZ", "description": "Hier die 1TB-SSD-Empfehlungen von Hinko und seinem Team" },
+  "ssd-2tb": { "url": "https://gh.at/g/Hgz", "description": "Hier die 2TB-SSD-Empfehlungen von Hinko und seinem Team" },
+  "gehaeuse-atx": { "url": "https://gh.at/g/HgM", "description": "Hier die ATX-Gehäuse-Empfehlungen von Hinko und seinem Team" },
+  "gehaeuse-matx": { "url": "https://gh.at/g/HgT", "description": "Hier die mATX-Gehäuse-Empfehlungen von Hinko und seinem Team" },
+  "luefter-rgb": { "url": "https://gh.at/g/HgN", "description": "Hier die RGB-Lüfter-Empfehlungen von Hinko und seinem Team" },
+  "luefter-ohne-rgb": { "url": "https://gh.at/g/Hgl", "description": "Hier die Lüfter-Empfehlungen ohne RGB von Hinko und seinem Team" },
+  "gaming-pc": { "url": "https://gh.at/g/Hgs", "description": "Hinkos Gaming-PC bei Geizhals" },
+  "arbeits-pc": { "url": "https://gh.at/g/Hgj", "description": "Hinkos Arbeits-PC bei Geizhals" },
+  "setup": { "url": "https://gh.at/g/Hgh", "description": "Hinkos Setup bei Geizhals" },
+  "amazon": { "url": "https://amzlink.to/az09AaaMFsxUY", "description": "Hinkos Amazon-Empfehlungen" },
+  "setup-essentials": { "url": "https://amzlink.to/az0fW9nx2b2sf", "description": "Setup-Essentials von Hinko bei Amazon" }
 }
