@@ -48,7 +48,7 @@ export async function execute(interaction) {
   }
 
   if (sub === 'list') {
-    const lines = Object.entries(links).map(([n, e]) => `• \`${n}\` – ${e.description || e.url}`);
+    const lines = Object.entries(links).map(([n, e]) => `• \`${n}\` – <${e.url}>`);
     return interaction.reply({ content: lines.join('\n') || 'Noch keine Links vorhanden.', ephemeral: true });
   }
 
