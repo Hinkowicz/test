@@ -1,0 +1,4 @@
+{
+  "website": { "url": "https://example.com", "description": "Unsere Website" },
+  "shop": { "url": "https://example.com/shop", "description": "Zum Shop" }
+}

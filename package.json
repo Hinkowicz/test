@@ -1,0 +1,16 @@
+{
+  "name": "discord-giveaway-bot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Discord bot for giveaways and link commands",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/index.js",
+    "deploy": "node --env-file-if-exists=.env src/deploy-commands.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.0"
+  }
+}
