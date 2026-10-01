@@ -29,3 +29,28 @@ export function isHttpUrl(value) {
     return false;
   }
 }
+
+/**
+ * Applies partial changes to one entry of a links map without mutating the input.
+ * `changes` may contain `newName`, `url` and `description`; missing/undefined fields stay as they are.
+ * Returns `{ links }` on success or `{ error }` (`missing`, `invalid-url`, `exists`, `nothing`).
+ */
+export function editLink(links, name, { newName, url, description } = {}) {
+  const entry = links[name];
+  if (!entry) return { error: 'missing' };
+  if (newName === undefined && url === undefined && description === undefined) return { error: 'nothing' };
+  if (url !== undefined && !isHttpUrl(url)) return { error: 'invalid-url' };
+  const target = newName ?? name;
+  if (target !== name && links[target]) return { error: 'exists' };
+
+  const updated = {
+    url: url ?? entry.url,
+    description: description ?? entry.description ?? '',
+  };
+  const result = {};
+  for (const [key, value] of Object.entries(links)) {
+    if (key === name) result[target] = updated;
+    else result[key] = value;
+  }
+  return { links: result };
+}

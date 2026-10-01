@@ -1,6 +1,6 @@
 import { PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
 import { loadJson, saveJson } from '../storage.js';
-import { isHttpUrl } from '../util.js';
+import { editLink, isHttpUrl } from '../util.js';
 
 const FILE = 'data/links.json';
 const load = () => loadJson(FILE, loadJson('data/links.default.json', {}));
@@ -23,6 +23,15 @@ export const data = new SlashCommandBuilder()
       .addStringOption((o) => o.setName('name').setDescription('Kurzname').setRequired(true).setMaxLength(32))
       .addStringOption((o) => o.setName('url').setDescription('https://…').setRequired(true))
       .addStringOption((o) => o.setName('beschreibung').setDescription('Kurze Beschreibung').setMaxLength(100)),
+  )
+  .addSubcommand((s) =>
+    s
+      .setName('edit')
+      .setDescription('Vorhandenen Link bearbeiten (Mods)')
+      .addStringOption((o) => o.setName('name').setDescription('Link, der geändert werden soll').setRequired(true).setAutocomplete(true))
+      .addStringOption((o) => o.setName('neuer_name').setDescription('Neuer Kurzname').setMaxLength(32))
+      .addStringOption((o) => o.setName('url').setDescription('Neue URL (https://…)'))
+      .addStringOption((o) => o.setName('beschreibung').setDescription('Neue Beschreibung').setMaxLength(100)),
   )
   .addSubcommand((s) =>
     s
@@ -63,6 +72,24 @@ export async function execute(interaction) {
     links[name] = { url, description: interaction.options.getString('beschreibung') ?? '' };
     saveJson(FILE, links);
     return interaction.reply({ content: `Link \`${name}\` gespeichert.`, ephemeral: true });
+  }
+
+  if (sub === 'edit') {
+    const newName = interaction.options.getString('neuer_name')?.toLowerCase();
+    const result = editLink(links, name, {
+      newName: newName ?? undefined,
+      url: interaction.options.getString('url') ?? undefined,
+      description: interaction.options.getString('beschreibung') ?? undefined,
+    });
+    const errors = {
+      missing: 'Diesen Link gibt es nicht.',
+      nothing: 'Bitte gib mindestens eine Änderung an (neuer_name, url oder beschreibung).',
+      'invalid-url': 'Bitte eine gültige http(s)-URL angeben.',
+      exists: 'Ein Link mit diesem neuen Namen gibt es schon.',
+    };
+    if (result.error) return interaction.reply({ content: errors[result.error], ephemeral: true });
+    saveJson(FILE, result.links);
+    return interaction.reply({ content: `Link \`${newName ?? name}\` aktualisiert.`, ephemeral: true });
   }
 
   if (!links[name]) return interaction.reply({ content: 'Diesen Link gibt es nicht.', ephemeral: true });
